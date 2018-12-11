@@ -1,0 +1,3 @@
+2018-12-11 16:34:30.696835: I tensorflow_serving/model_servers/server.cc:82] Building single TensorFlow model file config:  model_name: fashion_model model_base_path: ./model/
+2018-12-11 16:34:30.697013: I tensorflow_serving/core/basic_manager.cc:280] Unload all remaining servables in the manager.
+Failed to start server. Error: Invalid argument: Expected model fashion_model to have an absolute path or URI; got base_path()=./model/

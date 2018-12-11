@@ -1,0 +1,19 @@
+nohup: ignoring input
+2018-12-11 16:43:27.163879: I tensorflow_serving/model_servers/server.cc:82] Building single TensorFlow model file config:  model_name: fashion_model model_base_path: /home/zkl/zklcode/code/tfserve/test/model/
+2018-12-11 16:43:27.163993: I tensorflow_serving/model_servers/server_core.cc:461] Adding/updating models.
+2018-12-11 16:43:27.164004: I tensorflow_serving/model_servers/server_core.cc:558]  (Re-)adding model: fashion_model
+2018-12-11 16:43:27.264295: I tensorflow_serving/core/basic_manager.cc:739] Successfully reserved resources to load servable {name: fashion_model version: 1}
+2018-12-11 16:43:27.264327: I tensorflow_serving/core/loader_harness.cc:66] Approving load for servable version {name: fashion_model version: 1}
+2018-12-11 16:43:27.264335: I tensorflow_serving/core/loader_harness.cc:74] Loading servable version {name: fashion_model version: 1}
+2018-12-11 16:43:27.264348: I external/org_tensorflow/tensorflow/contrib/session_bundle/bundle_shim.cc:363] Attempting to load native SavedModelBundle in bundle-shim from: /home/zkl/zklcode/code/tfserve/test/model/1
+2018-12-11 16:43:27.264355: I external/org_tensorflow/tensorflow/cc/saved_model/reader.cc:31] Reading SavedModel from: /home/zkl/zklcode/code/tfserve/test/model/1
+2018-12-11 16:43:27.312641: I external/org_tensorflow/tensorflow/cc/saved_model/reader.cc:54] Reading meta graph with tags { serve }
+2018-12-11 16:43:27.327445: I external/org_tensorflow/tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2018-12-11 16:43:27.401688: I external/org_tensorflow/tensorflow/cc/saved_model/loader.cc:162] Restoring SavedModel bundle.
+2018-12-11 16:43:27.550294: I external/org_tensorflow/tensorflow/cc/saved_model/loader.cc:138] Running MainOp with key legacy_init_op on SavedModel bundle.
+2018-12-11 16:43:27.550326: I external/org_tensorflow/tensorflow/cc/saved_model/loader.cc:259] SavedModel load for tags { serve }; Status: success. Took 285965 microseconds.
+2018-12-11 16:43:27.550356: I tensorflow_serving/servables/tensorflow/saved_model_warmup.cc:83] No warmup data file found at /home/zkl/zklcode/code/tfserve/test/model/1/assets.extra/tf_serving_warmup_requests
+2018-12-11 16:43:27.550430: I tensorflow_serving/core/loader_harness.cc:86] Successfully loaded servable version {name: fashion_model version: 1}
+2018-12-11 16:43:27.562998: I tensorflow_serving/model_servers/server.cc:286] Running gRPC ModelServer at 0.0.0.0:8500 ...
+2018-12-11 16:43:27.613447: I tensorflow_serving/model_servers/server.cc:302] Exporting HTTP/REST API at:localhost:8501 ...
+[evhttp_server.cc : 237] RAW: Entering the event loop ...
