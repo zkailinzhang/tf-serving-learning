@@ -1,0 +1,4 @@
+nohup: ignoring input
+2018-12-11 18:40:59.077022: I tensorflow_serving/model_servers/server.cc:82] Building single TensorFlow model file config:  model_name: fashion_model model_base_path: ./model/
+2018-12-11 18:40:59.077223: I tensorflow_serving/core/basic_manager.cc:280] Unload all remaining servables in the manager.
+Failed to start server. Error: Invalid argument: Expected model fashion_model to have an absolute path or URI; got base_path()=./model/

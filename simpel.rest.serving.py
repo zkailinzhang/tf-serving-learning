@@ -1,3 +1,5 @@
+#-*- coding:utf-8 -*-
+
 import tensorflow as tf 
 
 from tensorflow import keras
@@ -7,6 +9,10 @@ import matplotlib.pyplot as  plt
 
 import os
 import subprocess
+import gzip
+import random
+import json
+import requests
 
 print(tf.__version__)
 dirname,filename = os.path.split(os.path.abspath(__file__))
@@ -16,7 +22,7 @@ os.chdir(dirname)
 
 
 def load_data(path,kind='train'):
-    import gzip
+    
 
     labels_path = os.path.join(path,'%s-labels-idx1-ubyte.gz'% kind)
     images_path = os.path.join(path,'%s-images-idx3-ubyte.gz'%kind)
@@ -49,12 +55,7 @@ class_names = ['T-shirt/top','Trouser','Pullover','Dress','Coat','Sandal','Shirt
 print('\n train images shape {},of {}'.format(train_images.shape,train_images.dtype))
 print('\n test images shape {},of {}'.format(test_images.shape,test_images.dtype))
 
-def train():
-
-
-
-
-
+def train2():
     model = keras.Sequential(
         [
         keras.layers.Conv2D(input_shape=(28,28,1),filters=8,kernel_size=3,strides=2,activation='relu',name='Conv1'),
@@ -150,7 +151,13 @@ def train():
     # tf serving  用docker 是最方便的
     #用tf serving run，下载模型， 然后就可以做推断请求，uing REST 
 
+'''
+命令航执行
 
+nohup tensorflow_model_server   --rest_api_port=8501   --model_name=fashion_model   
+--model_base_path="/home/zkl/zklcode/code/tfserve/test/model/" >server.log 2>&1
+
+'''
 
 
 def requestclient():
@@ -161,11 +168,30 @@ def requestclient():
         plt.axis('off')
         plt.title('\n\n{}'.format(title),fontdict={'size':16})
 
-    import random
+
 
     rando = random.randint(0,len(test_images)-1)
-    show(rando,'exam:{}'.format(class_names[test_labels[rando]]))
+    #show(rando,'exam:{}'.format(class_names[test_labels[rando]]))
 
+
+    data = json.dumps( {"signature_name":"serving_default","instances":test_images[0:3].tolist() } )
+
+    print('Data: {}...{}'.format(data[:50],data[len(data)-52:] ))
+
+    headers = {"content-type":"application/json"}
+
+    json_response = requests.post(url='http://localhost:8501/v1/models/fashion_model:predict',data=data,headers=headers)
+
+    predictions = json.loads(json_response.text)['predictions']
+
+    print(predictions)
+
+    for i in range(0,3):
+        show(0,'The model thought this was a {} (class {}),add it was actually a {} (class {})'
+        .format(class_names[np.argmax(predictions[i])],test_labels[np.argmax(predictions[i])] ,
+        class_names[i],test_labels[i] ))
+
+    
 
 
 if __name__ == '__main__':
